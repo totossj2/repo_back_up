@@ -1,6 +1,5 @@
 package com.uade.tpo.cars_e_commerce.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     public Category createCategory(String description) throws CategoryDuplicateException {
-        List<Category> categories = categoryRepository.findByDescription(description);
+        Optional<Category> categories = categoryRepository.findByDescription(description);
         if (categories.isEmpty())
             return categoryRepository.save(new Category(description));
         throw new CategoryDuplicateException();
