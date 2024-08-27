@@ -8,7 +8,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-
 import com.uade.tpo.cars_e_commerce.entity.Cars;
 import com.uade.tpo.cars_e_commerce.entity.Category;
 import com.uade.tpo.cars_e_commerce.exceptions.CarNotFoundException;
@@ -59,7 +58,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public List<Cars> getCarByRangePrice(Double price_min,Double price_max) throws CarNotFoundException {
+    public List<Cars> getCarByPriceRange(Double price_min,Double price_max) throws CarNotFoundException {
         return carRepository.findByRangePrice(price_min, price_max);
     }
 
