@@ -16,25 +16,49 @@ import lombok.Data;
 @Data
 public class User {
 
+    public User() {}
+
+   
+    public User(Long id, String username, String password, String email, String name, String surname, String home_address, String phone_number, String role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.home_address = home_address;
+        this.phone_number = phone_number;
+        this.role = role;
+
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;    
+    private Long id;
+
     @Column
     private String username;
+
     @Column
     private String password;
+
     @Column
     private String email;
+
     @Column
-    private String rol;
+    private String role;
+
     @Column
     private String name;
+
     @Column
     private String surname;
+
     @Column
     private String home_address;
+
     @Column
-    private int phone_number;
+    private String phone_number;
 
     //poner relacion de uno a mucho con ordenCompra
     @OneToMany (mappedBy = "user")
@@ -42,4 +66,12 @@ public class User {
 
     @OneToMany (mappedBy = "user")
     private List<ShopCart> carrito;
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
 }
