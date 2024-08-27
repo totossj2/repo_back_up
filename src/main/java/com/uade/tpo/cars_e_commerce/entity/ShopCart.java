@@ -7,8 +7,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Data
@@ -22,7 +22,7 @@ public class ShopCart {
         @Column
         private long total;
 
-        @ManyToOne
+        @OneToOne
         @JoinColumn(name = "user_id", nullable = false)
         private User user;
 
