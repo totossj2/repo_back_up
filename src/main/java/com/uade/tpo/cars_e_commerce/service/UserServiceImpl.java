@@ -14,18 +14,26 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User registerUser(String username, String password) {
-        // Implementa la lógica para registrar un usuario
-        User newUser = new User();
-        newUser.setUsername(username);
-        newUser.setPassword(password);
-        return userRepository.save(newUser);
+    @Override
+    public User registerUser(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        return userRepository.findByUsernameCustomQuery(username);
+    }
+
+    @Override
+    public Iterable<User> findAll() {
+        return userRepository.findAll();
     }
 
     @Override
     public boolean loginUser(String username, String password) {
-        // Implementa la lógica para el login de usuario
         User user = userRepository.findByUsernameCustomQuery(username);
         return user != null && user.getPassword().equals(password);
     }
+
+     
 }

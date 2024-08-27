@@ -6,31 +6,14 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.Data;
 
 @Entity
 @Data
 public class User {
 
-    public User() {}
-
-   
-    public User(Long id, String username, String password, String email, String name, String surname, String home_address, String phone_number, String role) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.name = name;
-        this.surname = surname;
-        this.home_address = home_address;
-        this.phone_number = phone_number;
-        this.role = role;
-
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +29,7 @@ public class User {
     private String email;
 
     @Column
-    private String role;
+    private String rol;
 
     @Column
     private String name;
@@ -64,8 +47,8 @@ public class User {
     @OneToMany (mappedBy = "user")
     private List<Order> ordenCompra;
 
-    @OneToMany (mappedBy = "user")
-    private List<ShopCart> carrito;
+    @OneToOne (mappedBy = "user")
+    private ShopCart carrito;
 
     public String getPassword() {
         return this.password;
