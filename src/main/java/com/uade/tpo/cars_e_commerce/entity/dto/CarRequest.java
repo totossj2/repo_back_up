@@ -9,7 +9,7 @@ public class CarRequest {
     private Long id;
     private String manufacturer;
     private String modelName;
-    private String modelYear; 
+    private Integer modelYear; 
     private String color;
     private Double price;
     private Integer stock;

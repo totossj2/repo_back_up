@@ -27,7 +27,7 @@ public class Cars {
         private String modelName;
     
         @Column
-        private String modelYear;
+        private Integer modelYear;
     
         @Column
         private String color;
