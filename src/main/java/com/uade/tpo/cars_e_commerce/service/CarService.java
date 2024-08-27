@@ -24,7 +24,7 @@ public interface CarService {
 
     List<Cars> getCarByPrice(Double price) throws CarNotFoundException;
 
-    List<Cars> getCarByRangePrice(Double price_min, Double price_max) throws CarNotFoundException;
+    List<Cars> getCarByPriceRange(Double price_min, Double price_max) throws CarNotFoundException;
 
     List<Cars> getCarByColor(String Color) throws CarNotFoundException;
 

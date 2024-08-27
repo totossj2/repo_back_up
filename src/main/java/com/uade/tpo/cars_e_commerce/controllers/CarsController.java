@@ -1,18 +1,18 @@
 package com.uade.tpo.cars_e_commerce.controllers;
 import java.net.URI;
-import java.util.*;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.uade.tpo.cars_e_commerce.entity.Cars;
 import com.uade.tpo.cars_e_commerce.entity.Category;
@@ -71,13 +71,14 @@ public class CarsController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/price-range")
-    public ResponseEntity<List<Cars>> getCarByRangePrice(@RequestParam Double price_min, @RequestParam Double price_max) throws CarNotFoundException {
-        List<Cars> result = carService.getCarByRangePrice(price_min, price_max);
+    @GetMapping("/price-range/{price_min}/{price_max}")
+    public ResponseEntity<List<Cars>> getCarByPriceRange(@PathVariable Double price_min, @PathVariable Double price_max) throws CarNotFoundException {
+        List<Cars> result = carService.getCarByPriceRange(price_min, price_max);
         if (result.isEmpty())
             return ResponseEntity.noContent().build();
         return ResponseEntity.ok(result);
     }
+    
 
     @GetMapping("/color/{color}")
     public ResponseEntity<List<Cars>> getCarByColor(@PathVariable String color) throws CarNotFoundException {
