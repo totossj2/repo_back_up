@@ -23,11 +23,11 @@ public class Cars {
         @Column
         private String manufacturer;
     
-        @Column
+        @Column(name = "model_name")
         private String modelName;
     
-        @Column
-        private Integer modelYear;
+        @Column(name = "model_year")
+        private int modelYear;
     
         @Column
         private String color;

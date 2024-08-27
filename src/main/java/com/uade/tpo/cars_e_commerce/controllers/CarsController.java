@@ -1,6 +1,6 @@
 package com.uade.tpo.cars_e_commerce.controllers;
 import java.net.URI;
-import java.util.Optional;
+import java.util.*;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -30,7 +30,7 @@ public class CarsController {
     @Autowired
     private CarService carService;
 
-@PostMapping
+    @PostMapping
     public ResponseEntity<Object> createCar(@RequestBody CarRequest carRequest) throws CarDuplicateException {
         Cars car = new Cars();
         car.setManufacturer(carRequest.getManufacturer());
@@ -44,7 +44,7 @@ public class CarsController {
         Cars result = carService.createCar(car);
         URI location = URI.create("/cars/" + result.getCarId());
         return ResponseEntity.created(location).body(result);
-}
+    }
     
 @GetMapping
     public ResponseEntity<Page<Cars>> getCars(
@@ -55,55 +55,51 @@ public class CarsController {
         return ResponseEntity.ok(carService.getCars(PageRequest.of(page, size)));
     }
 
-    @GetMapping("/{manufacturer}")
-    public ResponseEntity<Cars> getCarByManufacturer(@PathVariable String manufacturer) throws CarNotFoundException{
-        Optional<Cars> result = carService.getCarByManufacturer(manufacturer);
-        if (result.isPresent())
-            return ResponseEntity.ok(result.get());
-        return ResponseEntity.noContent().build();
+    @GetMapping("/manufacturer/{manufacturer}")
+    public ResponseEntity<List<Cars>> getCarByManufacturer(@PathVariable String manufacturer) throws CarNotFoundException {
+        List<Cars> result = carService.getCarByManufacturer(manufacturer);
+        if (result.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/{price}")
-    public ResponseEntity<Cars> getCarByPrice(@PathVariable Double price) throws CarNotFoundException{
-        Optional<Cars> result = carService.getCarByPrice(price);
-        if (result.isPresent())
-            return ResponseEntity.ok(result.get());
-        return ResponseEntity.noContent().build();
+    @GetMapping("/price/{price}")
+    public ResponseEntity<List<Cars>> getCarByPrice(@PathVariable Double price) throws CarNotFoundException {
+        List<Cars> result = carService.getCarByPrice(price);
+        if (result.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/{range_price}")
-    public ResponseEntity<Cars> getCarByRangePrice(@PathVariable Double price_min, @PathVariable Double price_max) throws CarNotFoundException{
-        Optional<Cars> result = carService.getCarByRangePrice(price_min, price_max);
-        if (result.isPresent())
-            return ResponseEntity.ok(result.get());
-        return ResponseEntity.noContent().build();
+    @GetMapping("/price-range")
+    public ResponseEntity<List<Cars>> getCarByRangePrice(@RequestParam Double price_min, @RequestParam Double price_max) throws CarNotFoundException {
+        List<Cars> result = carService.getCarByRangePrice(price_min, price_max);
+        if (result.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/{color}")
-    public ResponseEntity<Cars> getCarByColor(@RequestParam String Color) throws CarNotFoundException{
-        Optional<Cars> result = carService.getCarByColor(Color);
-        if(result.isPresent())
-            return ResponseEntity.ok(result.get());
-        return ResponseEntity.noContent().build();
-    } 
-
-    @GetMapping("/{model_name}")
-    public ResponseEntity<Cars> getCarByModelName(@RequestParam String model_name) throws CarNotFoundException{
-        Optional<Cars> result = carService.getCarByModelName(model_name);
-        if(result.isPresent())
-            return ResponseEntity.ok(result.get());
-        return ResponseEntity.noContent().build();
+    @GetMapping("/color/{color}")
+    public ResponseEntity<List<Cars>> getCarByColor(@PathVariable String color) throws CarNotFoundException {
+        List<Cars> result = carService.getCarByColor(color);
+        if (result.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/{model_name}")
-    public ResponseEntity<Cars> getCarByModelYear(@RequestParam Integer model_year) throws CarNotFoundException{
-        Optional<Cars> result = carService.getCarByModelYear(model_year);
-        if(result.isPresent())
-            return ResponseEntity.ok(result.get());
-        return ResponseEntity.noContent().build();
+    @GetMapping("/model/{modelName}")
+    public ResponseEntity<List<Cars>> getCarByModelName(@PathVariable String modelName) throws CarNotFoundException {
+        List<Cars> result = carService.getCarByModelName(modelName);
+        if (result.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(result);
     }
 
-
-    
-    
+    @GetMapping("/year/{model_year}")
+    public ResponseEntity<List<Cars>> getCarByModelYear(@PathVariable int modelYear) throws CarNotFoundException {
+        List<Cars> result = carService.getCarByModelYear(modelYear);
+        if (result.isEmpty())
+            return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(result);
+    }
 }

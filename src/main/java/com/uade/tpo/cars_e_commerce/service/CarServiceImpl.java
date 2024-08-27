@@ -49,33 +49,33 @@ public class CarServiceImpl implements CarService {
     }
     
     @Override
-    public Optional<Cars> getCarByManufacturer(String manufacturer) throws CarNotFoundException {
+    public List<Cars> getCarByManufacturer(String manufacturer) throws CarNotFoundException {
         return carRepository.findByManufacturer(manufacturer);
     }
 
     @Override
-    public Optional<Cars> getCarByPrice(Double price) throws CarNotFoundException {
+    public List<Cars> getCarByPrice(Double price) throws CarNotFoundException {
         return carRepository.findByPrice(price);
     }
 
     @Override
-    public Optional<Cars> getCarByRangePrice(Double price_min,Double price_max) throws CarNotFoundException {
+    public List<Cars> getCarByRangePrice(Double price_min,Double price_max) throws CarNotFoundException {
         return carRepository.findByRangePrice(price_min, price_max);
     }
 
     @Override
-    public Optional<Cars> getCarByColor(String color) throws CarNotFoundException{
+    public List<Cars> getCarByColor(String color) throws CarNotFoundException{
         return carRepository.findByColor(color);
     }
 
     @Override
-    public Optional<Cars> getCarByModelName(String model_name) throws CarNotFoundException{
-        return carRepository.findByModelName(model_name);
+    public List<Cars> getCarByModelName(String modelName) throws CarNotFoundException{
+        return carRepository.findByModelName(modelName);
     }
 
     @Override
-    public Optional<Cars> getCarByModelYear(Integer model_year) throws CarNotFoundException{
-        return carRepository.findByModelYear(model_year);
+    public List<Cars> getCarByModelYear(int modelYear) throws CarNotFoundException{
+        return carRepository.findByModelYear(modelYear);
     }
 
 }

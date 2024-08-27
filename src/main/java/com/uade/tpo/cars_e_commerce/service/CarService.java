@@ -20,15 +20,15 @@ public interface CarService {
 
     Cars createCar(Cars car) throws CarDuplicateException;
 
-    Optional<Cars> getCarByManufacturer(String manufacturer) throws CarNotFoundException;
+    List<Cars> getCarByManufacturer(String manufacturer) throws CarNotFoundException;
 
-    Optional<Cars> getCarByPrice(Double price) throws CarNotFoundException;
+    List<Cars> getCarByPrice(Double price) throws CarNotFoundException;
 
-    Optional<Cars> getCarByRangePrice(Double price_min, Double price_max) throws CarNotFoundException;
+    List<Cars> getCarByRangePrice(Double price_min, Double price_max) throws CarNotFoundException;
 
-    Optional<Cars> getCarByColor(String Color) throws CarNotFoundException;
+    List<Cars> getCarByColor(String Color) throws CarNotFoundException;
 
-    Optional<Cars> getCarByModelName(String model_name) throws CarNotFoundException;
+    List<Cars> getCarByModelName(String modelName) throws CarNotFoundException;
 
-    Optional<Cars> getCarByModelYear(Integer model_year) throws CarNotFoundException;
+    List<Cars> getCarByModelYear(int modelYear) throws CarNotFoundException;
 }
