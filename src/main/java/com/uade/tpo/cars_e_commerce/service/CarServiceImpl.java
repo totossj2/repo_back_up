@@ -9,19 +9,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.uade.tpo.cars_e_commerce.entity.Cars;
-import com.uade.tpo.cars_e_commerce.entity.Category;
+import com.uade.tpo.cars_e_commerce.exceptions.CarDuplicateException;
 import com.uade.tpo.cars_e_commerce.exceptions.CarNotFoundException;
 import com.uade.tpo.cars_e_commerce.repository.CarRepository;
-import com.uade.tpo.cars_e_commerce.repository.CategoryRepository;
 
 @Service
 public class CarServiceImpl implements CarService {
 
     @Autowired
     private CarRepository carRepository;
-
-    @Autowired
-    private CategoryRepository categoryRepository;
 
     @Override
     public Page<Cars> getCars(PageRequest pageRequest) {
@@ -34,12 +30,16 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Cars createCar(Cars car) {
-        Category category = categoryRepository.findByDescription(car.getCategory().getDescription())
-                .orElseThrow(() -> new RuntimeException("Category not found"));
-
-        car.setCategory(category);
-
+    public Cars createCar(Cars car) throws CarDuplicateException {
+        boolean exists = carRepository.existsByManufacturerAndModelNameAndModelYear(
+                car.getManufacturer(),
+                car.getModelName(),
+                car.getModelYear());
+        
+        if (exists) {
+            throw new CarDuplicateException();
+        }
+        
         return carRepository.save(car);
     }
 

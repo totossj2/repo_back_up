@@ -2,14 +2,14 @@ package com.uade.tpo.cars_e_commerce.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
 import com.uade.tpo.cars_e_commerce.entity.Cars;
 import java.util.List;
-import java.util.Optional;
 
-
+@Repository
 public interface CarRepository extends JpaRepository<Cars, Long> {
-    boolean existsByModelNameAndManufacturer(String modelName, String manufacturer);
+    boolean existsByManufacturerAndModelNameAndModelYear(String manufacturer, String modelName, Integer modelYear);
 
     @Query(value = "select c from Cars c where c.manufacturer = ?1")
     List<Cars> findByManufacturer(String manufacturer);

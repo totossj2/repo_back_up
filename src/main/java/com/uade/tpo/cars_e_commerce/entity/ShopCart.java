@@ -20,7 +20,7 @@ public class ShopCart {
         private Long shopCartid;
 
         @Column
-        private long total;
+        private Double total;
 
         @OneToOne
         @JoinColumn(name = "user_id", nullable = false)

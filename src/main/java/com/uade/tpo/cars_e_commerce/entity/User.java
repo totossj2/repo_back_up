@@ -14,6 +14,20 @@ import lombok.Data;
 @Data
 public class User {
 
+    public User() {}
+
+    public User(Long id, String username, String password, String email, String name, String surname, String home_address, String phone_number, String role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.name = name;
+        this.surname = surname;
+        this.home_address = home_address;
+        this.phone_number = phone_number;
+        this.role = role;
+
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,7 +43,7 @@ public class User {
     private String email;
 
     @Column
-    private String rol;
+    private String role;
 
     @Column
     private String name;
@@ -49,12 +63,5 @@ public class User {
 
     @OneToOne (mappedBy = "user")
     private ShopCart carrito;
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
+    
 }

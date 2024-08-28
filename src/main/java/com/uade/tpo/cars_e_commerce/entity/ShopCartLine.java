@@ -11,19 +11,19 @@ import lombok.Data;
 @Data
 @Entity
 public class ShopCartLine {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idShopCartLine;
+    private Long ShopCartLineid;
 
-    //cambie el nombre del atributo ya que hace conflicto con el anotacion de la clase ShopCart
     private Long cartIdentifier;
 
     @Column
-    private Long quantity;
-    @Column
-    private Long linePrice;
+    private Integer quantity;
 
-    
+    @Column
+    private Double linePrice;
+
     @ManyToOne
     @JoinColumn(name = "cart_id", nullable = false)
     private ShopCart shopCart;
