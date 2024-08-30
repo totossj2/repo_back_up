@@ -31,4 +31,5 @@ public interface CarService {
     List<Cars> getCarByModelName(String modelName) throws CarNotFoundException;
 
     List<Cars> getCarByModelYear(int modelYear) throws CarNotFoundException;
+
 }
